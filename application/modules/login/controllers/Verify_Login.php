@@ -49,12 +49,12 @@ class verify_login extends MY_Controller {
      foreach($result as $row)
      {
       //pre($row);
-     
+       //pre($this->input->ip_address());
+       //pre($_SERVER['REMOTE_ADDR']);
        $sess_array = array(
-         'id' => $row->id,
+         'id' => $row->User_ID,
          'username' => $row->username,
          'ip_address' => $this->input->ip_address(),
-         'ip' => $this->CI->getIPfromXForwarded(),
          'user_agent' => $this->input->user_agent()
        );
        $this->session->set_userdata('logged_in', $sess_array);
@@ -63,7 +63,7 @@ class verify_login extends MY_Controller {
        //$session_id = $this->session->userdata('logged_in');
        //pre($session_id);
        //pre(ip_address());
-       pre($this->session->all_userdata());
+       //pre($this->session->all_userdata());
      }
      return TRUE;
    }
