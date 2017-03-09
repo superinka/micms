@@ -26,7 +26,7 @@ class verify_login extends MY_Controller {
    else
    {
      //Go to private area
-     redirect(base_url('admin/home'), 'refresh');
+     //redirect(base_url('admin/home'), 'refresh');
     //echo '1';
    }
 
@@ -44,16 +44,26 @@ class verify_login extends MY_Controller {
 
    if($result)
    {
+
      $sess_array = array();
      foreach($result as $row)
      {
       //pre($row);
-      pre(session_id());
+     
        $sess_array = array(
          'id' => $row->id,
-         'username' => $row->username
+         'username' => $row->username,
+         'ip_address' => $this->input->ip_address(),
+         'ip' => $this->CI->getIPfromXForwarded(),
+         'user_agent' => $this->input->user_agent()
        );
        $this->session->set_userdata('logged_in', $sess_array);
+       //$this->session->set_userdata('session_id', $sess_array);
+       
+       //$session_id = $this->session->userdata('logged_in');
+       //pre($session_id);
+       //pre(ip_address());
+       pre($this->session->all_userdata());
      }
      return TRUE;
    }
