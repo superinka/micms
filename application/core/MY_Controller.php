@@ -9,7 +9,7 @@ Class MY_Controller extends CI_Controller {
 		$new_url = $this->uri->segment(1);
 		switch ($new_url) {
 			case 'admin' : {
-				$this->load->helper('admin');
+				//$this->load->helper('admin');
 				break;
 			}
 			

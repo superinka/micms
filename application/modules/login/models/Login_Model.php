@@ -1,7 +1,7 @@
 <?php
 Class login_model extends MY_Model{
 	var $table = 'tb_users';
-	var $key = 'id';
+	var $key = 'User_ID';
 	
 	function login($username, $password)
 	{

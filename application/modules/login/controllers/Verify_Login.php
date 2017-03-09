@@ -26,7 +26,7 @@ class verify_login extends MY_Controller {
    else
    {
      //Go to private area
-     //redirect(base_url('admin/home'), 'refresh');
+     redirect(base_url('admin/home'), 'refresh');
     //echo '1';
    }
 
