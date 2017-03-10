@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-Đây là trang home
-=======
-
           <!-- top tiles -->
           <div class="row tile_count">
             <div class="col-md-2 col-sm-4 col-xs-6 tile_stats_count">
@@ -691,5 +687,3 @@
               </div>
             </div>
           </div>
-        
->>>>>>> origin/master
