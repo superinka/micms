@@ -4,7 +4,7 @@
 	}
 
 	function admin_theme($url=''){
-		return base_url('public/admin_temp'.$url);
+		return base_url('public/temp/admin/gentelella-master'.$url);
 	}
 	
 	function pre($list,$exit=true){
