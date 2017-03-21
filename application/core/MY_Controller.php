@@ -22,6 +22,7 @@ Class MY_Controller extends CI_Controller {
 
 		$this->load->model('login/login_model','',TRUE);
 		$this->load->model('login/user_activity_model','',TRUE);
+		$this->load->model('admin/admin_category_model','',TRUE);
 
 		global $account_type;
 
@@ -80,6 +81,18 @@ Class MY_Controller extends CI_Controller {
 
 		return $addr[sizeof($addr)-1]; 
 	} 
+
+	function check_slug($slug) {
+		if($slug==null) {
+			return '0';
+		}
+		else if($slug!=null){
+			
+			if ($this->admin_category_model->check_exists($where=array('Slug'=>$slug))) {
+				return '1';
+			}
+		}
+	}
 
 
 	function logout()
