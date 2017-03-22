@@ -31,13 +31,18 @@
             </tr>
             </thead>
             <tbody>
+            <?php 
+            foreach ($list_category as $key => $value) {
+            ?>    
             <tr>
-                <td style="width:50%">Tiger</td>
-                <td>Nixon</td>
-                <td>Edinburgh</td>
-                <td>61</td>
+                <td><?php echo $value->Cate_Name ?></td>
+                <td></td>
+                <td><?php echo $value->Parent_Cate ?></td>
+                <td><?php echo $value->Cate_Desc ?></td>
             </tr>
-
+            <?php
+            }
+            ?>
 
 
             </tbody>

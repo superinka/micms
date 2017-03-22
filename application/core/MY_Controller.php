@@ -84,13 +84,21 @@ Class MY_Controller extends CI_Controller {
 
 	function check_slug($slug) {
 		if($slug==null) {
-			return '0';
+			return TRUE;
 		}
 		else if($slug!=null){
-			
-			if ($this->admin_category_model->check_exists($where=array('Slug'=>$slug))) {
-				return '1';
-			}
+	    $input = array();
+	    $input['where']['Slug'] = $slug;
+		$list_slug = $this->admin_category_model->get_list($input);
+		if($list_slug && $list_slug!=null) {
+
+			return FALSE;
+		}
+
+		if(!$list_slug || $list_slug==null){
+			return TRUE;
+		}
+
 		}
 	}
 

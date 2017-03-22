@@ -1,3 +1,4 @@
+
 <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
         <div class="x_title">
@@ -21,8 +22,8 @@
         </div>
         <div class="x_content">
         <br>
-        <form id="demo-form2" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="">
-
+        <form id="demo-form2" data-parsley-validate=""  method="post" action="" class="form-horizontal form-label-left" novalidate="">
+        <?php echo validation_errors(); ?>
             <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tên danh mục <span class="required">*</span>
                 </label>
@@ -33,18 +34,21 @@
             <div class="form-group">
                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Mô tả</label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <textarea class="resizable_textarea form-control" placeholder="This text area automatically resizes its height as you fill in more text courtesy of autosize-master it out..."></textarea>
+                    <textarea name="description" class="resizable_textarea form-control" placeholder="This text area automatically resizes its height as you fill in more text courtesy of autosize-master it out..."></textarea>
                 </div>
             </div>
             <div class="form-group">
             <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Danh mục cha</label>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <select class="form-control">
-                    <option>Chọn danh mục cha</option>
-                    <option>Option one</option>
-                    <option>Option two</option>
-                    <option>Option three</option>
-                    <option>Option four</option>
+                <select class="form-control" id="category" name="category">
+                    <option value="0">Chọn danh mục cha</option>
+                    <?php 
+                    foreach ($list_category as $key => $value) {
+                    ?>
+                    <option value="<?php echo $value->Cate_ID ?>"><?php echo $value->Cate_Name ?></option>
+                    <?php 
+                    }
+                    ?>
                 </select>
             </div>
             </div>
@@ -53,10 +57,10 @@
                 <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Slug
                 </label>
                 <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="slug" name="slug" required="required" value="" class="form-control col-md-7 col-xs-12">
+                    <input type="text" id="slug" name="slug" onkeyup="ChangeToSlug2();" required="required" value="" class="form-control col-md-7 col-xs-12">
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-12">
-                    <div id="disp"></div>
+                    <div id="disp" style="padding-top:8px;"></div>
                 </div>
             </div>   
             <div class="form-group">
@@ -64,7 +68,7 @@
                 <div class="col-md-9 col-sm-9 col-xs-12" style="padding-top:10px;">
                     <div class="">
                     <label>
-                        <input type="checkbox" class="js-switch" checked /> Kích hoạt
+                        <input name="status" type="checkbox" class="js-switch" checked /> Kích hoạt
                     </label>
                     </div>
                 </div>
@@ -116,15 +120,73 @@
         slug = slug.replace(/\@\-|\-\@|\@/gi, '');
         //In slug ra textbox có id “slug”
         document.getElementById('slug').value = slug;
+        //console.log(slug);
 
-        if(slug==""){
+        var new_slug = document.getElementById('slug').value;
+        //console.log(new_slug);
+
+        if(new_slug==""){
             $("#disp").html("");
         }
         else {
             $.ajax({
             type: "POST",
             url: "<?php echo base_url(); ?>" + "admin/category/slug_check",
-            data: "slug="+ slug ,
+            data: "slug="+ new_slug ,
+            success: function(html){
+            $("#disp").html(html);
+            }
+            });
+            return false;
+        }
+    }
+
+    function ChangeToSlug2()
+    {
+        var title, slug;
+
+        //Lấy text từ thẻ input title 
+        title = document.getElementById("slug").value;
+
+        //Đổi chữ hoa thành chữ thường
+        slug = title.toLowerCase();
+
+        //Đổi ký tự có dấu thành không dấu
+        slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
+        slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
+        slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
+        slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
+        slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
+        slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
+        slug = slug.replace(/đ/gi, 'd');
+        //Xóa các ký tự đặt biệt
+        slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
+        //Đổi khoảng trắng thành ký tự gạch ngang
+        slug = slug.replace(/ /gi, "-");
+        //Đổi nhiều ký tự gạch ngang liên tiếp thành 1 ký tự gạch ngang
+        //Phòng trường hợp người nhập vào quá nhiều ký tự trắng
+        slug = slug.replace(/\-\-\-\-\-/gi, '-');
+        slug = slug.replace(/\-\-\-\-/gi, '-');
+        slug = slug.replace(/\-\-\-/gi, '-');
+        slug = slug.replace(/\-\-/gi, '-');
+        //Xóa các ký tự gạch ngang ở đầu và cuối
+        slug = '@' + slug + '@';
+        slug = slug.replace(/\@\-|\-\@|\@/gi, '');
+        //In slug ra textbox có id “slug”
+        document.getElementById('slug').value = slug;
+        //console.log(slug);
+
+        var new_slug = document.getElementById('slug').value;
+        //console.log(new_slug);
+
+        if(new_slug==""){
+            $("#disp").html("");
+        }
+        else {
+            $.ajax({
+            type: "POST",
+            url: "<?php echo base_url(); ?>" + "admin/category/slug_check",
+            data: "slug="+ new_slug ,
             success: function(html){
             $("#disp").html(html);
             }
