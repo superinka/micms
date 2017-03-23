@@ -7,6 +7,10 @@
 		return base_url('public/temp/admin/gentelella-master'.$url);
 	}
 	
+	function fe_url($url=''){
+		return base_url('public/temp/front-end/corlate'.$url);
+	}
+
 	function pre($list,$exit=true){
 		echo "<pre>";
 		print_r($list);
