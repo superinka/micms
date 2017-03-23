@@ -8,7 +8,7 @@
 	}
 	
 	function fe_url($url=''){
-		return base_url('public/temp/front-end/corlate'.$url);
+		return base_url('public/temp/site/corlate'.$url);
 	}
 
 	function pre($list,$exit=true){
