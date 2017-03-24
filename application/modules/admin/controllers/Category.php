@@ -10,11 +10,9 @@ Class Category Extends MY_Controller {
     function index(){
         
         $input = array();
-        $input['where']['Parent_Cate'] = 0;
+        // $input['where']['Parent_Cate'] = 0;
         $list_category = $this->admin_category_model->get_list($input);
         $this->data_layout['list_category'] = $list_category;
-
-        
 
         $this->data_layout['temp'] = 'category';
         $this->load->view('layout/main', $this->data_layout);

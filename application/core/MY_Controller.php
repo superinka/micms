@@ -103,6 +103,23 @@ Class MY_Controller extends CI_Controller {
 	}
 
 
+	function get_category_name_by_id($id){
+		if($id!=0){
+			$info_category = $this->admin_category_model->get_info($id);
+			if($info_category){
+				return $info_category->Cate_Name;
+			}
+			else {
+				return 'Không tồn tại';
+			}
+			
+		}
+		else {
+			return 'Thư mục gốc';
+		}
+	}
+
+
 	function logout()
     {
 	    $this->session->unset_userdata('logged_in');

@@ -12,12 +12,12 @@
 				
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
-                        <li class="active">
+                        <li class="home">
                             <a href="<?php echo base_url('site/home');?>">Home</a>
                         </li>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">Services</a></li>
-                        <li><a href="#">Portfolio</a></li>
+                        <li class="about"><a href="#">About Us</a></li>
+                        <li class="services"><a href="#">Services</a></li>
+                        <li class="portfolio"><a href="#">Portfolio</a></li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-angle-down"></i></a>
                             <ul class="dropdown-menu">
@@ -27,7 +27,7 @@
                                 <li><a href="shortcodes.html">Shortcodes</a></li>
                             </ul>
                         </li>
-                        <li><a href="<?php echo base_url('site/blog');?>">Blog</a></li> 
+                        <li class="blog"><a href="<?php echo base_url('site/blog');?>">Blog</a></li> 
                         <li><a href="contact-us.html">Contact</a></li>                        
                     </ul>
                 </div>

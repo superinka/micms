@@ -1,0 +1,12 @@
+.list-action {
+    list-style: none;
+}
+
+.list-action li {
+    float: left;
+    padding-right: 10px;
+}
+
+.modal-sm {
+    width: 500px;
+}

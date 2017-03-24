@@ -69,7 +69,8 @@
         <script src="<?php echo admin_theme('');?>/vendors/jszip/dist/jszip.min.js"></script>
         <script src="<?php echo admin_theme('');?>/vendors/pdfmake/build/pdfmake.min.js"></script>
         <script src="<?php echo admin_theme('');?>/vendors/pdfmake/build/vfs_fonts.js"></script>
-
+    <!-- Switchery -->
+    <script src="<?php echo admin_theme('');?>/vendors/switchery/dist/switchery.min.js"></script>
         <!-- Custom Theme Scripts -->
         <script src="<?php echo admin_theme('');?>/build/js/custom.min.js"></script>
             <script>

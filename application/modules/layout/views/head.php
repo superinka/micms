@@ -22,9 +22,11 @@
     <link href="<?php echo admin_theme('');?>/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
     <!-- bootstrap-daterangepicker -->
     <link href="<?php echo admin_theme('');?>/vendors/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-
+    <!-- Switchery -->
+    <link href="<?php echo admin_theme('');?>/vendors/switchery/dist/switchery.min.css" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="<?php echo admin_theme('');?>/build/css/custom.min.css" rel="stylesheet">
+
 <?php }?>
 
 
@@ -73,3 +75,6 @@
     <!-- Custom Theme Style -->
     <link href="<?php echo admin_theme('');?>/build/css/custom.min.css" rel="stylesheet">
 <?php }?>
+
+    <!-- My Custom Theme Style -->
+    <link href="<?php echo base_url('public/temp/admin');?>/mycss.css" rel="stylesheet">    
