@@ -69,6 +69,27 @@ Class Category Extends MY_Controller {
         $this->load->view('layout/main', $this->data_layout);      
     }
 
+    function edit(){
+        $message = $this->session->flashdata('message');
+	    $this->data_layout['message'] = $message;
+
+        $input = array();
+        $input['where']['Parent_Cate'] = 0;
+        $list_category = $this->admin_category_model->get_list($input);
+        $this->data_layout['list_category'] = $list_category;
+
+        if (isset($_POST['id'])) {
+            $id = $_POST['id'];
+            $category_info = $this->admin_category_model->get_info($id);
+            //pre($category_info);
+
+            $this->data_layout['category_info'] = $category_info;
+            
+        }
+        $this->data_layout['temp'] = 'category_edit';
+        $this->load->view('category_edit', $this->data_layout);  
+    }
+
     function slug_check(){
 
 		if (isset($_POST['slug'])) {

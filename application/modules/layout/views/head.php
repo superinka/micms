@@ -46,7 +46,8 @@
         <link href="<?php echo admin_theme('');?>/vendors/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
         <link href="<?php echo admin_theme('');?>/vendors/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
         <link href="<?php echo admin_theme('');?>/vendors/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
-
+    <!-- Switchery -->
+    <link href="<?php echo admin_theme('');?>/vendors/switchery/dist/switchery.min.css" rel="stylesheet">
         <!-- Custom Theme Style -->
         <link href="<?php echo admin_theme('');?>/build/css/custom.min.css" rel="stylesheet">
     <?php }?>

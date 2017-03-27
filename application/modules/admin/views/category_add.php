@@ -38,19 +38,19 @@
                 </div>
             </div>
             <div class="form-group">
-            <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Danh mục cha</label>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <select class="form-control" id="category" name="category">
-                    <option value="0">Chọn danh mục cha</option>
-                    <?php 
-                    foreach ($list_category as $key => $value) {
-                    ?>
-                    <option value="<?php echo $value->Cate_ID ?>"><?php echo $value->Cate_Name ?></option>
-                    <?php 
-                    }
-                    ?>
-                </select>
-            </div>
+                <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Danh mục cha</label>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                    <select class="form-control" id="category" name="category">
+                        <option value="0">Chọn danh mục cha</option>
+                        <?php 
+                        foreach ($list_category as $key => $value) {
+                        ?>
+                        <option value="<?php echo $value->Cate_ID ?>"><?php echo $value->Cate_Name ?></option>
+                        <?php 
+                        }
+                        ?>
+                    </select>
+                </div>
             </div>
 
             <div class="form-group">

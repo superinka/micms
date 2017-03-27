@@ -10,3 +10,12 @@
 .modal-sm {
     width: 500px;
 }
+
+.edit_form>.form-group {
+    margin-bottom: 10px;
+}
+
+.modal-body .form-horizontal .col-sm-3,
+.modal-body .form-horizontal .col-sm-9 {
+    width: 100%
+}

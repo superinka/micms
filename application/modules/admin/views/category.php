@@ -40,93 +40,14 @@
                 <td><?php echo $value->Cate_Name ?></td>
                 <td>
                     <ul class="list-action">
-                        <li><a data-toggle="modal" data-target="#myModal-<?php echo $value->Cate_ID ?>" href="#"><i class="fa fa-edit" aria-hidden="true"></i></a></li>
+                        <li><a class="openModal" data-toggle="modal" data-target="#myModal" slug="<?php echo $value->Slug ?>" data-id="<?php echo $value->Cate_ID?>" href="#"><i class="fa fa-edit" aria-hidden="true"></i></a></li>
                         <li><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
                     </ul>
                 </td>
                 <td><?php echo $cate_name ?></td>
                 <td><?php echo $value->Cate_Desc ?></td>
             </tr>
-            <!-- Modal -->
-            <div class="modal fade" id="myModal-<?php echo $value->Cate_ID ?>" role="dialog">
-                <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Sửa đổi thông tin</h4>
-                    </div>
-                    <div class="modal-body">
-                    <div class="row">
-                        <form id="demo-form2" data-parsley-validate=""  method="post" action="" class="form-horizontal form-label-left" novalidate="">
-                                <?php echo validation_errors(); ?>
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Tên danh mục <span class="required">*</span>
-                                        </label>
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input type="text" id="category-name" name="category-name" onkeyup="ChangeToSlug();" required="required" class="form-control col-md-7 col-xs-12">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Mô tả</label>
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <textarea name="description" class="resizable_textarea form-control" placeholder="This text area automatically resizes its height as you fill in more text courtesy of autosize-master it out..."></textarea>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                    <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Danh mục cha</label>
-                                    <div class="col-md-6 col-sm-6 col-xs-12">
-                                        <select class="form-control" id="category" name="category">
-                                            <option value="0">Chọn danh mục cha</option>
-                                            <?php 
-                                            foreach ($list_category as $key => $value) {
-                                            ?>
-                                            <option value="<?php echo $value->Cate_ID ?>"><?php echo $value->Cate_Name ?></option>
-                                            <?php 
-                                            }
-                                            ?>
-                                        </select>
-                                    </div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">Slug
-                                        </label>
-                                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                            <input type="text" id="slug" name="slug" onkeyup="ChangeToSlug2();" required="required" value="" class="form-control col-md-7 col-xs-12">
-                                        </div>
-                                        <div class="col-md-3 col-sm-3 col-xs-12">
-                                            <div id="disp" style="padding-top:8px;"></div>
-                                        </div>
-                                    </div>   
-                                    <div class="form-group">
-                                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Tình trạng</label>
-                                        <div class="col-md-9 col-sm-9 col-xs-12" style="padding-top:10px;">
-                                            <div class="">
-                                            <label>
-                                                <input name="status" type="checkbox" class="js-switch" checked /> Kích hoạt
-                                            </label>
-                                            </div>
-                                        </div>
-                                    </div>                    
-                                    <div class="ln_solid"></div>
-                                    <div class="form-group">
-                                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                                            <button class="btn btn-primary" type="reset">Reset</button>
-                                            <button type="submit" class="btn btn-success">Submit</button>
-                                        </div>
-                                    </div>
-
-                                </form>
-                            </div> 
-                            <div class="clearfix"></div>                   
-                    </div>
-                    <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
-                    <button type="button" class="btn btn-primary">Lưu lại</button>
-                    </div>
-                </div>
-                </div>
-            </div>
+            
             <?php
             }
             ?>
@@ -134,8 +55,203 @@
 
             </tbody>
         </table>
-        
-        
+        <!-- Modal -->
+            <div class="modal fade" id="myModal" role="dialog">
+            <form class="form-horizontal edit_form" role="form">
+                <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    
+                </div>
+                </div>
+            </form>
+            </div>
+            <!-- /Modal -->        
         </div>
     </div>
 </div>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+
+<script>
+  $('.openModal').click(function(){
+      var id = $(this).attr('data-id');
+      var old_slug = $(this).attr('slug');
+      //console.log(old_slug);
+      $.ajax({
+        //   url:"edit/"+id,cache:false,
+          type: "POST",
+          url: "<?php echo base_url(); ?>" + "admin/category/edit",
+          data: "id="+ id ,
+          success:function(result){
+          $(".modal-content").html(result);
+      }});
+  });
+</script>
+<script language="javascript">
+
+    function ChangeToSlug()
+    {
+        var title, slug;
+
+        var old_slug = document.getElementById('slug').value;
+        
+        //Lấy text từ thẻ input title 
+        title = document.getElementById("category-name").value;
+
+        //Đổi chữ hoa thành chữ thường
+        slug = title.toLowerCase();
+
+        
+
+        //Đổi ký tự có dấu thành không dấu
+        slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
+        slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
+        slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
+        slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
+        slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
+        slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
+        slug = slug.replace(/đ/gi, 'd');
+        //Xóa các ký tự đặt biệt
+        slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
+        //Đổi khoảng trắng thành ký tự gạch ngang
+        slug = slug.replace(/ /gi, "-");
+        //Đổi nhiều ký tự gạch ngang liên tiếp thành 1 ký tự gạch ngang
+        //Phòng trường hợp người nhập vào quá nhiều ký tự trắng
+        slug = slug.replace(/\-\-\-\-\-/gi, '-');
+        slug = slug.replace(/\-\-\-\-/gi, '-');
+        slug = slug.replace(/\-\-\-/gi, '-');
+        slug = slug.replace(/\-\-/gi, '-');
+        //Xóa các ký tự gạch ngang ở đầu và cuối
+        slug = '@' + slug + '@';
+        slug = slug.replace(/\@\-|\-\@|\@/gi, '');
+        //In slug ra textbox có id “slug”
+        document.getElementById('slug').value = slug;
+        //console.log(slug);
+
+        var new_slug = document.getElementById('slug').value;
+        //console.log(new_slug);
+        
+        
+
+        if(new_slug==""){
+            $("#disp").html("");
+        }
+        else {
+            $.ajax({
+            type: "POST",
+            url: "<?php echo base_url(); ?>" + "admin/category/slug_check",
+            data: "slug="+ new_slug ,
+            success: function(html){
+            $("#disp").html(html);
+            }
+            });
+            return false;
+        }
+    }
+
+    function ChangeToSlug2()
+    {
+        var title, slug;
+
+        //Lấy text từ thẻ input title 
+        title = document.getElementById("slug").value;
+
+        //Đổi chữ hoa thành chữ thường
+        slug = title.toLowerCase();
+
+        //Đổi ký tự có dấu thành không dấu
+        slug = slug.replace(/á|à|ả|ạ|ã|ă|ắ|ằ|ẳ|ẵ|ặ|â|ấ|ầ|ẩ|ẫ|ậ/gi, 'a');
+        slug = slug.replace(/é|è|ẻ|ẽ|ẹ|ê|ế|ề|ể|ễ|ệ/gi, 'e');
+        slug = slug.replace(/i|í|ì|ỉ|ĩ|ị/gi, 'i');
+        slug = slug.replace(/ó|ò|ỏ|õ|ọ|ô|ố|ồ|ổ|ỗ|ộ|ơ|ớ|ờ|ở|ỡ|ợ/gi, 'o');
+        slug = slug.replace(/ú|ù|ủ|ũ|ụ|ư|ứ|ừ|ử|ữ|ự/gi, 'u');
+        slug = slug.replace(/ý|ỳ|ỷ|ỹ|ỵ/gi, 'y');
+        slug = slug.replace(/đ/gi, 'd');
+        //Xóa các ký tự đặt biệt
+        slug = slug.replace(/\`|\~|\!|\@|\#|\||\$|\%|\^|\&|\*|\(|\)|\+|\=|\,|\.|\/|\?|\>|\<|\'|\"|\:|\;|_/gi, '');
+        //Đổi khoảng trắng thành ký tự gạch ngang
+        slug = slug.replace(/ /gi, "-");
+        //Đổi nhiều ký tự gạch ngang liên tiếp thành 1 ký tự gạch ngang
+        //Phòng trường hợp người nhập vào quá nhiều ký tự trắng
+        slug = slug.replace(/\-\-\-\-\-/gi, '-');
+        slug = slug.replace(/\-\-\-\-/gi, '-');
+        slug = slug.replace(/\-\-\-/gi, '-');
+        slug = slug.replace(/\-\-/gi, '-');
+        //Xóa các ký tự gạch ngang ở đầu và cuối
+        slug = '@' + slug + '@';
+        slug = slug.replace(/\@\-|\-\@|\@/gi, '');
+        //In slug ra textbox có id “slug”
+        document.getElementById('slug').value = slug;
+        //console.log(slug);
+
+        var new_slug = document.getElementById('slug').value;
+        //console.log(new_slug);
+
+        if(new_slug==""){
+            $("#disp").html("");
+        }
+        else {
+            $.ajax({
+            type: "POST",
+            url: "<?php echo base_url(); ?>" + "admin/category/slug_check",
+            data: "slug="+ new_slug ,
+            success: function(html){
+            $("#disp").html(html);
+            }
+            });
+            return false;
+        }
+    }
+
+    $(document).ready(function(){
+        
+    // Khi người dùng click Đăng ký
+    $('#register-btn').click(function(){
+ 
+        // Lấy dữ liệu
+        var data = {
+            username    : $('#category-name').val()
+            // password    : $('#password').val(),
+            // email       : $('#email').val(),
+            // fullname    : $('#fullname').val()
+        };
+ 
+        // Gửi ajax
+        $.ajax({
+            type : "post",
+            dataType : "JSON",
+            url: "<?php echo base_url(); ?>" + "admin/category/edit",
+            data : data,
+            success : function(result)
+            {
+                // Có lỗi, tức là key error = 1
+                if (result.hasOwnProperty('error') && result.error == '1'){
+                    var html = '';
+ 
+                    // Lặp qua các key và xử lý nối lỗi
+                    $.each(result, function(key, item){
+                        // Tránh key error ra vì nó là key thông báo trạng thái
+                        if (key != 'error'){ 
+                            html += '<li>'+item+'</li>';
+                        }
+                    });
+                    $('.alert-danger').html(html).removeClass('hide');
+                    $('.alert-success').addClass('hide');
+                }
+                else{ // Thành công
+                    $('.alert-success').html('Đăng ký thành công!').removeClass('hide');
+                    $('.alert-danger').addClass('hide');
+ 
+                    // 4 giay sau sẽ tắt popup
+                    setTimeout(function(){
+                        $('#myModal').modal('hide');
+                        // Ẩn thông báo lỗi
+                        $('.alert-danger').addClass('hide');
+                        $('.alert-success').addClass('hide');
+                    }, 4000);
+                }
+            }
+        });
+    });
+});
+</script>
