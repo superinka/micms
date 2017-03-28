@@ -80,10 +80,13 @@ Class Category Extends MY_Controller {
 
         if (isset($_POST['id'])) {
             $id = $_POST['id'];
+            $slug = $_POST['slug'];
+            //pre($slug);
             $category_info = $this->admin_category_model->get_info($id);
             //pre($category_info);
 
             $this->data_layout['category_info'] = $category_info;
+            $this->data_layout['category_slug'] = $slug;
             
         }
         $this->data_layout['temp'] = 'category_edit';

@@ -81,7 +81,10 @@
         //   url:"edit/"+id,cache:false,
           type: "POST",
           url: "<?php echo base_url(); ?>" + "admin/category/edit",
-          data: "id="+ id ,
+          data: {
+              id : id,
+              slug : old_slug
+          },
           success:function(result){
           $(".modal-content").html(result);
       }});
@@ -93,7 +96,9 @@
     {
         var title, slug;
 
-        var old_slug = document.getElementById('slug').value;
+        var old_slug = $('#slug').data('slug');
+        var old_title = $('#slug').data('title');
+        //console.log(old_title);
         
         //Lấy text từ thẻ input title 
         title = document.getElementById("category-name").value;
@@ -129,29 +134,67 @@
         //console.log(slug);
 
         var new_slug = document.getElementById('slug').value;
+        var new_title = document.getElementById('category-name').value;
         //console.log(new_slug);
+
+        
         
         
 
-        if(new_slug==""){
-            $("#disp").html("");
-        }
-        else {
-            $.ajax({
-            type: "POST",
-            url: "<?php echo base_url(); ?>" + "admin/category/slug_check",
-            data: "slug="+ new_slug ,
-            success: function(html){
-            $("#disp").html(html);
+        if(new_title != old_title && new_slug == old_slug){
+            //console.log(new_slug);
+            //console.log(new_title);
+            
+            new_slug = new_slug + '1';
+            //console.log(new_slug);
+            document.getElementById('slug').value = new_slug;
+            if(new_slug==""){
+                $("#disp").html("");
             }
-            });
-            return false;
+            else {
+                $.ajax({
+                type: "POST",
+                url: "<?php echo base_url(); ?>" + "admin/category/slug_check",
+                data: "slug="+ new_slug ,
+                success: function(html){
+                $("#disp").html(html);
+                }
+                });
+                
+              
+                return false;
+
+
+            }
         }
+        
+        if(new_title != old_title && new_slug!=old_slug){
+            
+                if(new_slug==""){
+                    $("#disp").html("");
+                }
+                else {
+                    $.ajax({
+                    type: "POST",
+                    url: "<?php echo base_url(); ?>" + "admin/category/slug_check",
+                    data: "slug="+ new_slug ,
+                    success: function(html){
+                    $("#disp").html(html);
+                    }
+                    });
+                    return false;
+                }
+            
+        }
+
+
     }
 
     function ChangeToSlug2()
     {
         var title, slug;
+        var old_slug = $('#slug').data('slug');
+        var old_title = $('#slug').data('title');
 
         //Lấy text từ thẻ input title 
         title = document.getElementById("slug").value;
@@ -185,21 +228,53 @@
         //console.log(slug);
 
         var new_slug = document.getElementById('slug').value;
+        var new_title = document.getElementById('category-name').value;
         //console.log(new_slug);
 
-        if(new_slug==""){
-            $("#disp").html("");
-        }
-        else {
-            $.ajax({
-            type: "POST",
-            url: "<?php echo base_url(); ?>" + "admin/category/slug_check",
-            data: "slug="+ new_slug ,
-            success: function(html){
-            $("#disp").html(html);
+        if(new_title != old_title && new_slug == old_slug){
+            //console.log(new_slug);
+            //console.log(new_title);
+            
+            new_slug = new_slug + '1';
+            //console.log(new_slug);
+            document.getElementById('slug').value = new_slug;
+            if(new_slug==""){
+                $("#disp").html("");
             }
-            });
-            return false;
+            else {
+                $.ajax({
+                type: "POST",
+                url: "<?php echo base_url(); ?>" + "admin/category/slug_check",
+                data: "slug="+ new_slug ,
+                success: function(html){
+                $("#disp").html(html);
+                }
+                });
+                
+              
+                return false;
+
+
+            }
+        }
+        
+        if(new_title != old_title && new_slug!=old_slug){
+            
+                if(new_slug==""){
+                    $("#disp").html("");
+                }
+                else {
+                    $.ajax({
+                    type: "POST",
+                    url: "<?php echo base_url(); ?>" + "admin/category/slug_check",
+                    data: "slug="+ new_slug ,
+                    success: function(html){
+                    $("#disp").html(html);
+                    }
+                    });
+                    return false;
+                }
+            
         }
     }
 
