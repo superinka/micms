@@ -1,3 +1,6 @@
+<?php 
+
+?>
 <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
         <div class="x_title">
@@ -137,9 +140,6 @@
         var new_title = document.getElementById('category-name').value;
         //console.log(new_slug);
 
-        
-        
-        
 
         if(new_title != old_title && new_slug == old_slug){
             //console.log(new_slug);
@@ -278,55 +278,6 @@
         }
     }
 
-    $(document).ready(function(){
-        
-    // Khi người dùng click Đăng ký
-    $('#register-btn').click(function(){
- 
-        // Lấy dữ liệu
-        var data = {
-            username    : $('#category-name').val()
-            // password    : $('#password').val(),
-            // email       : $('#email').val(),
-            // fullname    : $('#fullname').val()
-        };
- 
-        // Gửi ajax
-        $.ajax({
-            type : "post",
-            dataType : "JSON",
-            url: "<?php echo base_url(); ?>" + "admin/category/edit",
-            data : data,
-            success : function(result)
-            {
-                // Có lỗi, tức là key error = 1
-                if (result.hasOwnProperty('error') && result.error == '1'){
-                    var html = '';
- 
-                    // Lặp qua các key và xử lý nối lỗi
-                    $.each(result, function(key, item){
-                        // Tránh key error ra vì nó là key thông báo trạng thái
-                        if (key != 'error'){ 
-                            html += '<li>'+item+'</li>';
-                        }
-                    });
-                    $('.alert-danger').html(html).removeClass('hide');
-                    $('.alert-success').addClass('hide');
-                }
-                else{ // Thành công
-                    $('.alert-success').html('Đăng ký thành công!').removeClass('hide');
-                    $('.alert-danger').addClass('hide');
- 
-                    // 4 giay sau sẽ tắt popup
-                    setTimeout(function(){
-                        $('#myModal').modal('hide');
-                        // Ẩn thông báo lỗi
-                        $('.alert-danger').addClass('hide');
-                        $('.alert-success').addClass('hide');
-                    }, 4000);
-                }
-            }
-        });
-    });
-});
+
 </script>
+
