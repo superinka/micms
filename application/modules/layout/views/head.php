@@ -81,3 +81,12 @@
 
     <!-- My Custom Theme Style -->
     <link href="<?php echo base_url('public/temp/admin');?>/mycss.css" rel="stylesheet">    
+    <script type="text/javascript" src="<?php echo public_url();?>others/chosen.css"></script>
+    <style>
+.category, .item, .chzn-container-single .chzn-single {
+    font-family: sans-serif}
+
+.category {font-weight: bold}
+
+.chzn-results li.item {padding-left: 25px;}    
+    </style>

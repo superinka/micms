@@ -164,4 +164,7 @@
     <script src="<?php echo admin_theme('');?>/vendors/starrr/dist/starrr.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="<?php echo admin_theme('');?>/build/js/custom.min.js"></script>
+
+    <script type="text/javascript" src="<?php echo public_url();?>ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="<?php echo public_url();?>others/chosen.jquery.min.js"></script>
 <?php }?>
