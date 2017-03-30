@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 28, 2017 at 06:25 AM
+-- Generation Time: Mar 30, 2017 at 12:25 PM
 -- Server version: 10.1.21-MariaDB
 -- PHP Version: 5.6.30
 
@@ -73,7 +73,6 @@ CREATE TABLE `tb_categories` (
 
 INSERT INTO `tb_categories` (`Cate_ID`, `Cate_Name`, `Cate_Desc`, `Parent_Cate`, `Slug`, `Path`, `status`) VALUES
 (1, 'Tin tức', 'mục tin tức', 0, 'tin-tuc', NULL, 1),
-(2, 'Tin nhanh', '', 1, 'tin-nhanh', NULL, 1),
 (3, 'Tin nhánh', 'test', 1, 'tin-nhanh1', NULL, 1);
 
 -- --------------------------------------------------------
@@ -149,6 +148,8 @@ CREATE TABLE `tb_posts` (
   `Post_Content` text COLLATE utf8_unicode_ci NOT NULL,
   `Post_Slug` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `Publish_Date` datetime NOT NULL,
+  `Publish_year` int(8) NOT NULL,
+  `Publish_month` int(8) NOT NULL,
   `Last_Edit` datetime NOT NULL,
   `Image` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `Num_Views` int(10) NOT NULL DEFAULT '0',
@@ -316,7 +317,7 @@ ALTER TABLE `tb_app_params`
 -- AUTO_INCREMENT for table `tb_categories`
 --
 ALTER TABLE `tb_categories`
-  MODIFY `Cate_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Cate_ID` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tb_comments`
 --
