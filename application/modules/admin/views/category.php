@@ -1,6 +1,3 @@
-<?php 
-
-?>
 <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
         <div class="x_title">
@@ -44,7 +41,7 @@
                 <td>
                     <ul class="list-action">
                         <li><a class="openModal" data-toggle="modal" data-target="#myModal" slug="<?php echo $value->Slug ?>" data-id="<?php echo $value->Cate_ID?>" href="#"><i class="fa fa-edit" aria-hidden="true"></i></a></li>
-                        <li><a href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
+                        <li><a id="delete_product" data-id="<?php echo $value->Cate_ID?>" href="#"><i class="fa fa-trash-o" aria-hidden="true"></i></a></li>
                     </ul>
                 </td>
                 <td><?php echo $cate_name ?></td>
@@ -281,3 +278,50 @@
 
 </script>
 
+<script>
+$(document).ready(function(){
+    $(document).on('click', '#delete_product', function(e){
+        
+        var productId = $(this).data('id');
+        SwalDelete(productId);
+        e.preventDefault();
+    });
+
+});
+
+function SwalDelete(productId){
+		
+		swal({
+			title:'Bạn có chắc chắn?',
+			text: "Dữ liệu này sẽ bị xóa ngay lập tức!",
+			type: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Đúng, Xóa nó!',
+            cancelButtonText: 'Bỏ qua',
+			showLoaderOnConfirm: true,
+			  
+			preConfirm: function() {
+			  return new Promise(function(resolve) {
+			       
+			     $.ajax({
+			   		url: "<?php echo base_url(); ?>" + "admin/category/delete",
+			    	type: 'POST',
+			       	data: 'delete='+productId,
+			       	dataType: 'json'
+			     })
+			     .done(function(response){
+			     	swal('Đã xóa!', response.message, response.status);
+					location.reload(); // then reload the page.
+			     })
+			     .fail(function(){
+			     	swal('Oops...', 'Có lỗi xảy ra !', 'error');
+			     });
+			  });
+		    },
+			allowOutsideClick: false			  
+		});	
+		
+	}
+</script>

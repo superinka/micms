@@ -206,6 +206,42 @@ Class Category Extends MY_Controller {
         $this->load->view('category_update', $this->data_layout);  
     }
 
+
+    function delete(){
+        $message = $this->session->flashdata('message');
+	    $this->data_layout['message'] = $message;         
+        
+        $response = array();
+        
+        if ($_POST['delete']) {
+            
+            
+            $pid = intval($_POST['delete']);
+            $info_category = $this->admin_category_model->get_info($pid);
+
+            if(!$info_category) {
+				$this->session->set_flashdata('message','Không tồn tại thông tin danh mục');
+				redirect(base_url('admin/category'));
+			}
+            else {
+                if($this->admin_category_model->delete($pid)){
+                    $this->session->set_flashdata('message','Xóa dữ liệu thành công ');
+					$response['status']  = 'success';
+			        $response['message'] = 'Danh mục đã được xóa thành công ...';
+                }
+                else {
+                    $response['status']  = 'success';
+			        $response['message'] = 'Danh mục đã được xóa không thành công ...';
+                }
+            }
+
+            die (json_encode($response));
+            $this->data_layout['response'] = $response;
+        }
+        $this->data_layout['temp'] = 'category_delete';
+        $this->load->view('category_delete', $this->data_layout);   
+    }
+
     function slug_check(){
 
 		if (isset($_POST['slug'])) {

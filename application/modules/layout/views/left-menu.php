@@ -12,7 +12,7 @@
                   <li><a><i class="fa fa-edit"></i> Bài viết<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="<?php echo base_url('admin/post'); ?>">Quản lí bài viết</a></li>
-                      <li><a href="form_advanced.html">Viết bài</a></li>
+                      <li><a href="<?php echo base_url('admin/post/add'); ?>">Viết bài</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-clone"></i> Trang<span class="fa fa-chevron-down"></span></a>

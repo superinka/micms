@@ -28,18 +28,26 @@
                 <th>Action</th>
                 <th>Ảnh đại diện</th>
                 <th>Danh mục</th>
-                <th>Description</th>
+                <th>Lượt xem</th>
             </tr>
             </thead>
             <tbody>
+            <?php 
+            foreach ($list_post as $key => $value) {
+            //pre($this->CI->get_category_name_by_id($value->Parent_Cate));
+            $cate_name = $this->CI->get_category_name_by_id($value->Cate_ID);
+            ?>   
             <tr>
-                <td style="width:50%">Tiger</td>
+                <td style="width:50%"><?php echo $value->Post_Name ?></td>
                 <td>Nixon</td>
                 <td>System Architect</td>
-                <td>Edinburgh</td>
-                <td>61</td>
+                <td><?php echo $cate_name ?></td>
+                <td><?php echo $value->Num_Views ?></td>
             </tr>
 
+            <?php
+            }
+            ?>
 
 
             </tbody>

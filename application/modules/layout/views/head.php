@@ -50,6 +50,8 @@
     <link href="<?php echo admin_theme('');?>/vendors/switchery/dist/switchery.min.css" rel="stylesheet">
         <!-- Custom Theme Style -->
         <link href="<?php echo admin_theme('');?>/build/css/custom.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="<?php echo public_url('temp/admin');?>/swal2/sweetalert2.min.css" type="text/css" />
+    
     <?php }?>
 <?php }?>
 

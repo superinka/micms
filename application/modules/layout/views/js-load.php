@@ -122,6 +122,9 @@
             TableManageButtons.init();
         });
         </script>
+
+        <!--//delete-->
+        <script src="<?php echo public_url('temp/admin');?>/swal2/sweetalert2.min.js"></script>
     <?php }?>
 <?php }?>
 
